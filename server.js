@@ -41,6 +41,10 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+var routes = require("./models");
+
+app.use(routes);
+
 app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with axios
     axios.get("http://www.echojs.com/").then(function(response) {
