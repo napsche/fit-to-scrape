@@ -1,3 +1,6 @@
+//set up Node server
+//include routes
+
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
@@ -47,7 +50,7 @@ app.use(routes);
 
 app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with axios
-    axios.get("http://www.echojs.com/").then(function(response) {
+    axios.get("https://pubmed.ncbi.nlm.nih.gov/").then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(response.data);
   

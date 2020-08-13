@@ -1,3 +1,5 @@
+//hold mongoose schemas and info to be saved to the database
+
 var mongoose = require("mongoose");
 
 // Save a reference to the Schema constructor
