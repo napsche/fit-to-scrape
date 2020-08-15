@@ -2,7 +2,7 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 var scrape = function (cb) {
-    request("https://pubmed.ncbi.nlm.nih.gov/", function(err, res, body) {
+    request("https://pubmed.ncbi.nlm.nih.gov/?callback=scrape", function(err, res, body) {
         var $ = cheerio.load(body);
 
         var articles = [];
