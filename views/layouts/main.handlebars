@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Fit-To-Scrape</title>
@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../../public/assets/css/style.css">
 </head>
 <body>
-	{{> nav/navbar}}
+	{{> nav}}
     
     <main>
       <div class="container">
@@ -24,4 +24,37 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 </body>
-</html>
+</html> --}}
+
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    {{!-- Materialize Icons --}}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    {{!-- Google Font --}}
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <!-- tab icon -->
+    <link rel="shortcut icon" href="assets/img/news-icon.png"/>
+    <title>Scrape the News</title>
+  </head>
+  <body>
+
+    {{ nav }}
+    
+    <main>
+      <div class="container">
+        {{{ body }}}
+      </div>
+    </main>
+
+    {{ footer}}
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  </body>
+<html>
