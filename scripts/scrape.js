@@ -2,21 +2,21 @@ var request = require("request");
 var cheerio = require("cheerio");
 
 var scrape = function (cb) {
-    request("https://pubmed.ncbi.nlm.nih.gov/?callback=scrape", function(err, res, body) {
+    request("https://www.nytimes.com", function(err, res, body) {
         var $ = cheerio.load(body);
 
         var articles = [];
 
-        $(".full-docsum").each(function(i, element) {
-            var title = $(this).children(".docsum-title").text().trim();
-            var summary = $(this).children(".docsum-citation").text().trim();
+        $(".theme-summary").each(function(i, element) {
+            var title = $(this).children(".story-heading").text().trim();
+            var summary = $(this).children(".summary").text().trim();
 
             if(title && summary) {
-                var titledNeat = title.replace(/(\r\n|\n|\r|\t|\s+)/gm, "").trim();
+                var titleNeat = title.replace(/(\r\n|\n|\r|\t|\s+)/gm, "").trim();
                 var summaryNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, "").trim();
 
                 var articleInfo = {
-                    articleTitle: titledNeat, 
+                    articleTitle: titleNeat, 
                     sum: summaryNeat
                 };
                 articles.push(articleInfo);
