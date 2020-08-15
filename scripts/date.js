@@ -1,12 +1,12 @@
-var makeNewDate = function() {
-    var newDate = new Date();
-    var formatDate = "";
+// var makeNewDate = function() {
+//     var newDate = new Date();
+//     var formatDate = "";
 
-    formatDate += (newDate.getMonth() + 1) + "_";
-    formatDate += newDate.getDate() + "_";
-    formatDate += newDate.getFullYear();
+//     formatDate += (newDate.getMonth() + 1) + "_";
+//     formatDate += newDate.getDate() + "_";
+//     formatDate += newDate.getFullYear();
 
-    return formatDate;
-};
+//     return formatDate;
+// };
 
-module.exports = makeNewDate;
+// module.exports = makeNewDate;

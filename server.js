@@ -1,19 +1,19 @@
 //set up Node server
 //include routes
-
 var express = require("express");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 var bodyParser = require("body-parser");
+var logger = require('morgan');
 
 var PORT = process.env.PORT || 3000; 
 
 // Initialize Express
 var app = express();
 
-var router = express.Router();
+// var router = express.Router();
 
-require("./config/routes")(router);
+// require("./config/routes")(router);
 
 app.use(express.static("public"));
 app.use(express.static(__dirname + "/public"));
@@ -21,11 +21,15 @@ app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.use(router);
+// app.use(router);
+
+var routes = require('./controllers/controller.js');
+app.use('/', routes);
 
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
