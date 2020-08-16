@@ -1,39 +1,79 @@
-{{!-- <div class="jumbotron text-center">
-  <div class="overlay"></div>
-  <div class="caption">
-    <h3>Fit-to-Scrape</h3>
-    <p>Mongo Scraper</p>
-  </div>
-</div>
-<div class="container-fluid article-container"
-
-<footer class="footer">
-    <div class="container">
-        <p>Fit-to-Scrape</p>
-    </div>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="../public/assets/javascript/index.js"></script> --}}
-
-<div>
-    <h1 class="card z-depth-3 center-align">Fit To Scrape!</h1>
+<div class="container">
     <div class="row">
-      <div class="col s3"></div>
-      <h5 class="card z-depth-3 center-align col s6">Mongo Scraper - Discover Articles!</h5>
+        <div class="col-md-12" id="titleDiv">
+            <h1 id="title">MONGO SCRAPER</h1>
+        </div>
+    </div>
+    <div class="row" class="linkRow">
+        <div class="col-md-4">
+            <a href="/saved" class="upper-link">SAVED ARTICLES</a>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-sm" id="scrapeBtn">SCRAPE</button>
+        </div>
+        <div class="col-md-4">
+            <a href="https://www.sciencenews.org/" class="upper-link">SCIENCENEWS.ORG</a>
+        </div>
+    </div>
+
+    <hr class="white-underline">
+    <div class="row">
+        {{#each result}}
+        {{#unless saved}}
+        <div class="col-md-6">
+
+            <div class="article">
+                <h2 class="headline">{{headline}}</h2>
+                <ul>
+                    <li class="summary">{{summaryOne}}</li>
+                    <li class="summary">{{summaryTwo}}</li>
+                </ul>
+                <hr>
+                <div class="row" id="bottom-row">
+                    <div class="col-md-6">
+                        <a href={{link}} class="link">FULL STORY</a>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="/update" method="PUT" id="save-article">
+                            <input type="hidden" name="id" value={{_id}}>
+                            <button class="btn btn-lg" id="saveBtn" type="submit">SAVE ARTICLE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {{/unless}}
+        {{/each}}
     </div>
 </div>
 
-<div class="row">
-  <div class="col s2"></div>
-  <div class ="col s8 left-align">
-    {{#each article}}
-      <div class="card-panel">
-        <h4>{{this.title}}</h4>
-        {{!-- goes to article.handlebars --}}
-        <a href = "/readArticle/{{this._id}}" class="waves-effect waves-light btn pink lighten-1" id="btnSignUp">Read Article</a>
-      </div>
-    {{/each}}
-  </div>
-</div>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#scrapeBtn").on("click", function (event) {
+            event.preventDefault();
+            $.get("/newscrape", function (data) {
+                location.reload();
+            });
+        });
+
+        $("#save-article").on("click", function (event) {
+            event.preventDefault();
+            console.log("save it!");
+            var id = $(this).children().val();
+            console.log(id);
+            var data = {
+                _id: id
+            }
+            $.ajax("/update/" + id, {
+                type: "PUT",
+                data: data
+            })
+            location.reload();
+        });
+    });
+</script>
