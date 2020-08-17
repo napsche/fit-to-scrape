@@ -12,11 +12,11 @@ var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
-app.use(express.static("public"));
+app.use(express.static(__dirname + 'public'));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-app.set('index', __dirname + '/views');
+app.set('index', __dirname, '/views');
 
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://heroku_215wrxkj:dbrillitjms5qsrqap1tk2ru60@ds215019.mlab.com:15019/heroku_215wrxkj";
@@ -35,7 +35,7 @@ app.get("/", function (req, res) {
     db.Article.find({ saved: false }, function (err, result) {
         if (err) throw err;
         res.render("index", { result })
-    })
+    });
 
 });
 app.get("/newscrape", function (req, res) {
@@ -54,7 +54,7 @@ app.get("/newscrape", function (req, res) {
                     summaryOne: summaryOne,
                     summaryTwo: summaryTwo,
                     link: link
-                })
+                });
             }
         });
         db.Article.create(results)
@@ -67,8 +67,8 @@ app.get("/newscrape", function (req, res) {
             })
         app.get("/", function (req, res) {
             res.render("index")
-        })
-    })
+        });
+    });
 });
 
 app.put("/update/:id", function (req, res) {
@@ -90,8 +90,8 @@ app.put("/unsave/:id", function(req, res) {
         } else {
             res.status(200).end();
         }
-    })
-})
+    });
+});
 
 app.put("/newnote/:id", function(req, res) {
     console.log("Working!");
@@ -105,8 +105,8 @@ app.put("/newnote/:id", function(req, res) {
         } else {
             res.status(200).end();
         } 
-    })
-})
+    });
+});
 
 
 
@@ -116,10 +116,10 @@ app.get("/saved", function (req, res) {
         if (err) throw err;
         savedArticles.push(saved)
         res.render("saved", { saved })
-    })
-})
+    });
+});
 
 
 app.listen(port, function () {
     console.log("Server listening on: http://localhost:" + port);
-})
+});
